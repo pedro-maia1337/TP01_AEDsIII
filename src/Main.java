@@ -16,7 +16,7 @@ public class Main {
             }
 
             // Menu principal
-            String opcao;
+            String op;
             do {
                 System.out.println("\n\nTP 1.0");
                 System.out.println("--------------");
@@ -27,9 +27,9 @@ public class Main {
                 System.out.println("(C) Minhas inscrições");
                 System.out.println("\n(S) Sair");
                 System.out.print("\nOpção: ");
-                opcao = console.nextLine().trim().toUpperCase();
+                op = console.nextLine().trim().toUpperCase();
 
-                switch (opcao) {
+                switch (op) {
                     case "A":
                         menuUsuarios.menu(usuarioLogado);
                         break;
@@ -43,7 +43,7 @@ public class Main {
                     default:
                         System.out.println("Opção inválida!");
                 }
-            } while (!opcao.equals("S"));
+            } while (!op.equals("S"));
 
         } catch (Exception e) {
             System.out.println("Erro do sistema: " + e.getMessage());
