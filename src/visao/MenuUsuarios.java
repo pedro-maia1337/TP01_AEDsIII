@@ -1,24 +1,29 @@
 package visao;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import arquivo.ArquivoUsuario;
+import arquivo.ArquivoCurso;
 import entidades.Usuario;
+import entidades.Curso;
 
 //Tela inicial de login
 
 public class MenuUsuarios {
 
     private ArquivoUsuario arqUsuarios;
+    private ArquivoCurso arqCursos;
     private static final Scanner console = new Scanner(System.in);
 
     public MenuUsuarios() throws Exception {
         arqUsuarios = new ArquivoUsuario();
+        arqCursos = new ArquivoCurso();
     }
 
     public Usuario telaInicial() {
         String opcao;
         do {
-            System.out.println("\n\nTP 1.0");
+            System.out.println("\n\nEntrePares 1.0");
             System.out.println("--------------");
             System.out.println("\n(A) Login");
             System.out.println("(B) Novo usuário");
@@ -206,12 +211,42 @@ public class MenuUsuarios {
 
     private boolean excluirUsuario(Usuario usuarioLogado) {
         System.out.println("\nATENÇÃO: Esta ação é irreversível!");
-        System.out.print("Confirma a exclusão da sua conta? (S/N) ");
-        if (!console.nextLine().trim().equalsIgnoreCase("S")) {
-            System.out.println("Exclusão cancelada.");
-            return false;
-        }
+        
         try {
+            // Verifica se o usuário possui cursos
+            ArrayList<Curso> cursos = arqCursos.readByUsuario(usuarioLogado.getId());
+            ArrayList<Curso> cursosAtivos = new ArrayList<>();
+            
+            // Filtra cursos ativos
+            for (Curso curso : cursos) {
+                if (curso.getEstado() == Curso.ATIVO_INSCRICOES || curso.getEstado() == Curso.ATIVO_SEM_INSCRICOES) {
+                    cursosAtivos.add(curso);
+                }
+            }
+            
+            if (!cursosAtivos.isEmpty()) {
+                System.out.println("\nNão é possível excluir sua conta pois você possui cursos ativos:");
+                for (Curso curso : cursosAtivos) {
+                    System.out.println("- " + curso.getNome() + " (" + curso.getEstadoTexto() + ")");
+                }
+                System.out.println("\nCancele ou conclua estes cursos antes de excluir sua conta.");
+                return false;
+            }
+            
+            System.out.print("Confirma a exclusão da sua conta? (S/N) ");
+            if (!console.nextLine().trim().equalsIgnoreCase("S")) {
+                System.out.println("Exclusão cancelada.");
+                return false;
+            }
+            
+            // Remove cursos inativos (concluídos/cancelados) do usuário
+            for (Curso curso : cursos) {
+                if (curso.getEstado() == Curso.CONCLUIDO || curso.getEstado() == Curso.CANCELADO) {
+                    arqCursos.delete(curso.getId());
+                }
+            }
+            
+            // Remove o usuário
             if (arqUsuarios.delete(usuarioLogado.getId())) {
                 System.out.println("Conta excluída. Até logo!");
                 return true;

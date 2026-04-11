@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import visao.MenuUsuarios;
+import visao.ControleCurso;
 import entidades.Usuario;
 
 public class Main {
@@ -7,6 +8,7 @@ public class Main {
         try {
             Scanner console = new Scanner(System.in);
             MenuUsuarios menuUsuarios = new MenuUsuarios();
+            ControleCurso controleCurso = new ControleCurso();
 
             // Tela de Login
             Usuario usuarioLogado = menuUsuarios.telaInicial();
@@ -18,7 +20,7 @@ public class Main {
             // Menu principal
             String op;
             do {
-                System.out.println("\n\nTP 1.0");
+                System.out.println("\n\nEntrePares 1.0");
                 System.out.println("--------------");
                 System.out.println("> Início");
                 System.out.println("\nOlá, " + usuarioLogado.getNome() + "!");
@@ -34,8 +36,10 @@ public class Main {
                         menuUsuarios.menu(usuarioLogado);
                         break;
                     case "B":
+                        controleCurso.menu(usuarioLogado);
+                        break;
                     case "C":
-                        System.out.println("\n[A ser implementado]");
+                        System.out.println("\n[A ser implementado no TP2]");
                         break;
                     case "S":
                         System.out.println("\nAté logo, " + usuarioLogado.getNome() + "!");
