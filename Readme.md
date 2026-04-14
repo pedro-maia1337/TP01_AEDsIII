@@ -1,5 +1,5 @@
 AEDs III - TP01
-Participantes: Pedro Maia, Gabriel Egídio Santos Beloni, Gabriel Evangelista Massara, Thiago Aurélio Nunes Martins
+Participantes: Pedro Henrique Cardoso Maia, Gabriel Egídio Santos Beloni, Gabriel Evangelista Massara, Thiago Aurélio Nunes Martins
 
 Descrição do TP:
 
