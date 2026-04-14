@@ -35,38 +35,54 @@ Prints do projeto:
     Interface/Execução
 
 1-
+
 ![Cadastro](docs/cadastro.png)
+
 *Cadastro de um novo usuário do sistema*
 
 2-
+
 ![NovoCurso](docs/createCurso.png)
+
 *Criação de um novo curso no sistema*
 
 3-
+
 ![DadosCurso](docs/dadosCursos.png)
+
 *Interface de dados sobre o curso cadastrado no sistema*
 
 4-
+
 ![Ordenacao](docs/ordenacao.png)
+
 *Vários cursos cadastrados, os quais são ordenados pela árvore B+ de maneira alfabética*
 
 5-
+
 ![Delete](docs/delete.png)
+
 *Tentativa de deletar a conta com cursos ativos, o qual o sistema não permite*
 
 
 Código
     (Operações Especiais Implementadas)
 1-
+
 ![1N](docs/1paraN.png)
+
 *Usa-se a classe ParUsuarioIdCursoId como chave de uma árvore dentro da classe ArquivoCurso. Permitindo que o sistema consiga os cursos de um usuario específico sem ter que ler o arquivo inteiro*
 
 2-
+
 ![NanoID](docs/nanoID.png)
+
 *Tal operação garante que dois cursos nunca tenham o mesmo código (são únicos), tal garantia é feita através da verificação da tabela Hash para ver se o código já existe, caso true, cancela.*
         
 3-
+
 ![DeleteUsuario](docs/deleteUser.png)
+
 *Tal especialidade verifica se há cursos com '0' ou '1', caso tenha, o sistema não permite a exclusão da conta, visto que é uma regra do sistema, caso o usuário tenha apenas cursos inativos, os sistema realiza a exclusão em cascata*
 
 
