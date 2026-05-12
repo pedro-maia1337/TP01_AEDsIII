@@ -2,6 +2,7 @@ import java.util.Scanner;
 import visao.MenuUsuarios;
 import visao.ControleCurso;
 import entidades.Usuario;
+import visao.ControleInscricao;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +10,7 @@ public class Main {
             Scanner console = new Scanner(System.in);
             MenuUsuarios menuUsuarios = new MenuUsuarios();
             ControleCurso controleCurso = new ControleCurso();
+            ControleInscricao controleInscricao = new ControleInscricao();
 
             // Tela de Login
             Usuario usuarioLogado = menuUsuarios.telaInicial();
@@ -39,7 +41,7 @@ public class Main {
                         controleCurso.menu(usuarioLogado);
                         break;
                     case "C":
-                        System.out.println("\n[A ser implementado no TP2]");
+                        controleInscricao.menu(usuarioLogado);
                         break;
                     case "S":
                         System.out.println("\nAté logo, " + usuarioLogado.getNome() + "!");
